@@ -1,0 +1,16 @@
+.carrusel-scroll-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 1rem;
+}
+
+.carrusel-cards {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 50px;
+}
+
+.carrusel-card {
+  min-width: 300px;
+  flex-shrink: 0;
+}
