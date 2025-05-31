@@ -3,7 +3,6 @@ import "./Styles/Carrusel.css";
 export const Carrusel = () => {
   return (
     <>
-     <h1>Personajes</h1>
     <div className="carrusel-scroll-container">
       <div className="carrusel-cards">
         <Card className="carrusel-card">

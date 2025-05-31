@@ -9,8 +9,11 @@ export const Home = () => {
 	return (
 		<>
 		<div className=" mt-5">
+			 <h1>Personajes</h1>
 			 <Carrusel />
+			 <h1>Planetas</h1>
 			 <Carrusel />
+			 <h1>vehiculos</h1>
 			 <Carrusel />
 		</div>
 		</>
