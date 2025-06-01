@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
-import PeopleDetails from "./pages/PeopleDetails";
-import PlanetDetails from "./pages/PlanetDetails";
-import StarshipDetails from "./pages/StarshipDetails";
+import PeopleDetails from "./pages/PeopleDetails/PeopleDetails";
+import PlanetDetails from "./pages/PlanetDetails/PlanetDetails";
+import StarshipDetails from "./pages/StarshipDetails/StarshipDetails";
 
 
 

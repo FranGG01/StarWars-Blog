@@ -7,8 +7,8 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+.container h1 {
+  font-family: 'Orbitron', sans-serif;
   font-weight: 700;
   font-size: 2.5rem;
   color: rgb(255, 255, 255) !important;
@@ -21,13 +21,13 @@ img {
   width: 100%;
   height: auto;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 0 auto 1.5rem auto;
 }
 
 .planet-list {
   margin: 5px;
-  background: #0b0c10; 
+  background: #0b0c10;
   padding: 1rem 2rem;
   box-shadow: 0 0 10px #66fcf1, 0 0 20px #45a29e inset;
   font-family: 'Orbitron', sans-serif;
@@ -52,7 +52,7 @@ img {
 }
 
 .planet-item span {
-  color: #f0c419; 
+  color: #f0c419;
   font-weight: 600;
   text-shadow:
     0 0 5px #f0c419,
@@ -65,4 +65,3 @@ img {
 .planet-item:last-child {
   border-bottom: none;
 }
-
