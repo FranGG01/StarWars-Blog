@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import './StarshipDetails.css'
 
 const StarshipDetails = () => {
     const { id } = useParams();
@@ -17,18 +18,43 @@ const StarshipDetails = () => {
 
         <div className="container mt-5">
             <h1> {starship.properties.name} </h1>
-            <img src={"https://placehold.co/400x600?text=No+Image"} alt={starship.properties.name} />
+            <img src={"https://placehold.co/600x400?text=No+Image"} alt={starship.properties.name} />
 
-            <ul className="list-group mt-3">
-                <li className="list-group-item">Consumables: {starship.properties.consumables}</li>
-                <li className="list-group-item">Cargo Capacity: {starship.properties.cargo_capacity}</li>
-                <li className="list-group-item">Passengers: {starship.properties.passengers}</li>
-                <li className="list-group-item">Crew: {starship.properties.crew}</li>
-                <li className="list-group-item">Length: {starship.properties.length}</li>
-                <li className="list-group-item">Cost: {starship.properties.cost_in_credits}</li>
-                <li className="list-group-item">Manufacturer: {starship.properties.manufacturer}</li>
-                <li className="list-group-item">Starship Class: {starship.properties.starship_class}</li>
+            <ul className="starship-list mt-3">
+                <li className="starship-item">
+                    <h4>Consumables:</h4>
+                    <span>{starship.properties.consumables}</span>
+                </li>
+                <li className="starship-item">
+                    <h4>Cargo Capacity:</h4>
+                    <span>{starship.properties.cargo_capacity}</span>
+                </li>
+                <li className="starship-item">
+                    <h4>Passengers:</h4>
+                    <span>{starship.properties.passengers}</span>
+                </li>
+                <li className="starship-item">
+                    <h4>Crew:</h4>
+                    <span>{starship.properties.crew}</span>
+                </li>
+                <li className="starship-item">
+                    <h4>Length:</h4>
+                    <span>{starship.properties.length}</span>
+                </li>
+                <li className="starship-item">
+                    <h4>Cost:</h4>
+                    <span>{starship.properties.cost_in_credits}</span>
+                </li>
+                <li className="starship-item">
+                    <h4>Manufacturer:</h4>
+                    <span>{starship.properties.manufacturer}</span>
+                </li>
+                <li className="starship-item">
+                    <h4>Starship Class:</h4>
+                    <span>{starship.properties.starship_class}</span>
+                </li>
             </ul>
+
         </div>
     </>)
 }
