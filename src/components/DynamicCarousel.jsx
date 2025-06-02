@@ -1,65 +1,49 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import DynamicCard from "./DynamicCard";
 
-const DynamicCarousel = () => {
-  const { store, dispatch } = useGlobalReducer();
-  const [people, setPeople] = useState([]);
-
-  useEffect(() => {
-    const fetchPeople = async () => {
-      const data = await getPeople();
-      const dataPeople = await Promise.all(
-        data.map((people) => getPeopleById(people.uid))
-      );
-      console.log(dataPeople);
-      setPeople(dataPeople);
-    };
-    fetchPeople();
-  }, []);
-
+const DynamicCarousel = ({ items, category }) => {
   return (
-    <div>
+    <div className="container my-5">
+      <h2 className="mb-3 text-capitalize">{category}</h2>
       <div
-        id="carouselExampleControls"
+        id={`carousel-${category}`}
         className="carousel slide"
         data-bs-ride="carousel"
       >
         <div className="carousel-inner">
-          <div className="carousel-item active">
-            {people.map((person, index) => (
-              <DynamicCard
-                category="people"
-                key={index}
-                className="col-12 col-md-4 mb-3"
-                info={person.properties}
-                id={person.uid}
-              />
-            ))}
-          </div>
+          {items.map((item, index) => (
+            <div
+              className={`carousel-item ${index === 0 ? "active" : ""}`}
+              key={index}
+            >
+              <div className="d-flex justify-content-center">
+                <DynamicCard
+                  info={item.properties}
+                  id={item.uid}
+                  category={category}
+                />
+              </div>
+            </div>
+          ))}
         </div>
+
         <button
           className="carousel-control-prev"
           type="button"
-          data-bs-target="#carouselExampleControls"
+          data-bs-target={`#carousel-${category}`}
           data-bs-slide="prev"
         >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Previous</span>
+          <span className="carousel-control-prev-icon" aria-hidden="true" />
+          <span className="visually-hidden">Anterior</span>
         </button>
         <button
           className="carousel-control-next"
           type="button"
-          data-bs-target="#carouselExampleControls"
+          data-bs-target={`#carousel-${category}`}
           data-bs-slide="next"
         >
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Next</span>
+          <span className="carousel-control-next-icon" aria-hidden="true" />
+          <span className="visually-hidden">Siguiente</span>
         </button>
       </div>
     </div>
