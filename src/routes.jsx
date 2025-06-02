@@ -11,12 +11,9 @@ import PeopleDetails from "./pages/PeopleDetails/PeopleDetails";
 import PlanetDetails from "./pages/PlanetDetails/PlanetDetails";
 import StarshipDetails from "./pages/StarshipDetails/StarshipDetails";
 
-
-
 export const router = createBrowserRouter(
   createRoutesFromElements(
-
-    <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>} >
+    <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>}>
       <Route path="/" element={<Home />} />
       <Route path="/people/:id" element={<PeopleDetails />} />
       <Route path="/planet/:id" element={<PlanetDetails />} />

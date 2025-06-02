@@ -1,16 +1,13 @@
 .carrusel-scroll-container {
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
 }
 
-.carrusel-cards {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 50px;
+.carrusel-scroll-container::-webkit-scrollbar {
+  height: 8px;
 }
 
-.carrusel-card {
-  min-width: 300px;
-  flex-shrink: 0;
+.carrusel-scroll-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
 }
