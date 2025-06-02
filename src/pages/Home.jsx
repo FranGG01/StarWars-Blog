@@ -1,14 +1,8 @@
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-// import DynamicCard from "../components/DynamicCard.jsx";
-import DynamicCarousel from "../components/DynamicCarousel.jsx";
-import {
-  getPeople,
-  getPeopleById,
-  getPlanets,
-  getPlanetById,
-  getVehicles,
-  getVehicleById,
-} from "../services/service.js";
+import { Carrusel } from "../components/Carrusel.jsx";
+import { getPeople, getPeopleById } from "../services/service-people.js";
+import { getPlanets, getPlanetById } from "../services/service-planets.js";
+import { getVehicles, getVehicleById } from "../services/service-vehicles.js";
 import { useEffect, useState } from "react";
 
 export const Home = () => {
@@ -25,7 +19,7 @@ export const Home = () => {
       );
       console.log(dataPeople);
       setPeople(dataPeople);
-      //   dispatch({ type: "SET_PEOPLE", payload: data });
+      dispatch({ type: "update_people", payload: dataPeople });
     };
     fetchPeople();
   }, []);
@@ -38,6 +32,7 @@ export const Home = () => {
       );
       console.log(dataPlanets);
       setPlanets(dataPlanets);
+      dispatch({ type: "update_planets", payload: dataPlanets });
     };
     fetchPlanets();
   }, []);
@@ -50,45 +45,21 @@ export const Home = () => {
       );
       console.log(dataVehicles);
       setVehicles(dataVehicles);
+      dispatch({ type: "update_vehicles", payload: dataVehicles });
     };
     fetchVehicles();
   }, []);
 
   return (
     <>
-      <DynamicCarousel items={people} category="people" />
-      <DynamicCarousel items={planets} category="planets" />
-      <DynamicCarousel items={vehicles} category="vehicles" />
-
-      {/* {people.map((person, index) => (
-        <DynamicCard
-          category="people"
-          key={index}
-          className="col-12 col-md-4 mb-3"
-          info={person.properties}
-          id={person.uid}
-        />
-      ))}
-
-      {planets.map((planet, index) => (
-        <DynamicCard
-          category="planets"
-          key={index}
-          className="col-12 col-md-4 mb-3"
-          info={planet.properties}
-          id={planet.uid}
-        />
-      ))}
-
-      {vehicles.map((vehicle, index) => (
-        <DynamicCard
-          category="vehicles"
-          key={index}
-          className="col-12 col-md-4 mb-3"
-          info={vehicle.properties}
-          id={vehicle.uid}
-        />
-      ))} */}
+      <div className=" mt-5">
+        <h1>Personajes</h1>
+        <Carrusel items={store.peopleList} category="people" />
+        <h1>Planetas</h1>
+        <Carrusel items={store.planetsList} category="planets" />
+        <h1>vehiculos</h1>
+        <Carrusel items={store.vehiclesList} category="vehicles" />
+      </div>
     </>
   );
 };

@@ -1,8 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 function DynamicCard({ category, info }) {
+  const { store, dispatch } = useGlobalReducer();
+
   const renderProperties = () => {
     switch (category) {
       case "people":
@@ -34,7 +37,9 @@ function DynamicCard({ category, info }) {
         return <p>Sin datos</p>;
     }
   };
-
+  const addFavorite = () => {
+    dispatch({ type: "add_favorite", payload: info.name });
+  };
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img src="..." className="card-img-top" alt="..." />
@@ -47,7 +52,10 @@ function DynamicCard({ category, info }) {
 
       <div className="card-body d-flex justify-content-between">
         <button className="btn btn-primary">Leer mas</button>
-        <button className="btn btn-warning">
+        <button
+          className="btn btn-warning"
+          onClick={() => addFavorite(info.name)}
+        >
           <FontAwesomeIcon icon={faHeart} />
         </button>
       </div>
