@@ -12,7 +12,10 @@ const PlanetDetails = () => {
             .then(data => setPlanet(data.result))
             .catch(error => console.log("ERROR AL CARGAR EL PLANETA"))
     }, [id])
+    
     if (!planet) return <p className="text-center mt-5">Cargando planeta...</p>;
+
+
 
     return (<>
         <div className="container mt-5">

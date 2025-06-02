@@ -9,7 +9,7 @@ import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import PeopleDetails from "./pages/PeopleDetails/PeopleDetails";
 import PlanetDetails from "./pages/PlanetDetails/PlanetDetails";
-import StarshipDetails from "./pages/StarshipDetails/StarshipDetails";
+import VehicleDetails from "./pages/VehicleDetails/VehicleDetails";
 
 
 
@@ -20,7 +20,7 @@ export const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="/people/:id" element={<PeopleDetails />} />
       <Route path="/planet/:id" element={<PlanetDetails />} />
-      <Route path="/starship/:id" element={<StarshipDetails />} />
+      <Route path="/vehicle/:id" element={<VehicleDetails />} />
     </Route>
   )
 );

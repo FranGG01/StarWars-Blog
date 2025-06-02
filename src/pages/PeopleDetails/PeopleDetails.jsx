@@ -5,60 +5,70 @@ import "./PeopleDetails.css";
 const PeopleDetails = () => {
     const { id } = useParams();
     const [person, setPerson] = useState(null);
-    const [homeworld, setHomeworld] = useState(null)
+
     useEffect(() => {
-        fetch(`https://www.swapi.tech/api/people/${id}`)
+        fetch(`https://akabab.github.io/starwars-api/api/id/${id}.json`)
             .then(res => res.json())
             .then(data => {
-                setPerson(data.result);
-
-                const planetUrl = data.result.properties.homeworld;
-                fetch(planetUrl)
-                    .then(res => res.json())
-                    .then(planetData => setHomeworld(planetData.result.properties.name))
-                    .catch(error => console.log("ERROR AL CARGAR PLANETA"))
+                setPerson(data);
             })
-            .catch(error => console.log("ERROR AL CARGAR PERSONAJE"))
-    }, [id])
+            .catch(error => console.log("ERROR AL CARGAR PERSONAJE", error));
+    }, [id]);
 
     if (!person) return <p className="text-center mt-5">Cargando personaje...</p>;
-    return (<>
+
+  const generatedDescription = `${person.name} es un personaje destacado del vasto universo de Star Wars. 
+    Cuenta con una altura de aproximadamente ${person.height} cm y un peso de ${person.mass} kg, 
+    características que pueden influir en su desempeño físico dentro de la historia galáctica. 
+    Su género es ${person.gender}, y posee una tonalidad de piel ${person.skinColor || "desconocida"}, 
+    lo que aporta aún más diversidad a las especies y culturas que habitan esta saga. 
+    ${person.name.split(" ")[0]} proviene de ${person.homeworld || "un planeta cuyo origen se mantiene en el misterio"}, 
+    lo que añade un toque de intriga a su historia personal y a su trasfondo dentro de la galaxia.`;
+
+    
+    return (
         <div className="container mt-5">
-            <h1>{person.properties.name}</h1>
-            <img src={"https://placehold.co/600x400?text=No+Image"} alt={person.properties.name} />
+            <div className="character-card d-flex">
+                <img
+                    src={person.image}
+                    alt={person.name}
+                    className="character-card-image"
+                />
+                <div className="character-card-info">
+                    <h2>{person.name.toUpperCase()}</h2>
+                    <p>{generatedDescription}</p>
+                </div>
+            </div>
+
 
             <ul className="people-list mt-3">
                 <li className="people-item">
                     <h4>Height:</h4>
-                    <span>{person.properties.height}</span>
+                    <span>{person.height}</span>
                 </li>
                 <li className="people-item">
                     <h4>Gender:</h4>
-                    <span>{person.properties.gender}</span>
+                    <span>{person.gender}</span>
                 </li>
                 <li className="people-item">
-                    <h4>Birth:</h4>
-                    <span>{person.properties.birth_year}</span>
+                    <h4>Birth Year:</h4>
+                    <span>{person.birthYear || "Desconocido"}</span>
                 </li>
                 <li className="people-item">
                     <h4>Mass:</h4>
-                    <span>{person.properties.mass}</span>
+                    <span>{person.mass}</span>
                 </li>
                 <li className="people-item">
                     <h4>Skin Color:</h4>
-                    <span>{person.properties.skin_color}</span>
+                    <span>{person.skinColor || "Desconocido"}</span>
                 </li>
                 <li className="people-item">
                     <h4>Home World:</h4>
-                    <span>{homeworld ? homeworld : "Cargando..."}</span>
+                    <span>{person.homeworld || "Desconocido"}</span>
                 </li>
             </ul>
-
-
-
         </div>
-
-    </>)
-}
+    );
+};
 
 export default PeopleDetails;
