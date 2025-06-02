@@ -1,4 +1,5 @@
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+// src/pages/Home.jsx (o el path correcto donde tengas tu componente)
+import useGlobalReducer from "../hooks/useGlobalReducer"; // ajusta la ruta si es diferente
 import { Carrusel } from "../components/Carrusel.jsx";
 import { getPeople, getPeopleById } from "../services/service-people.js";
 import { getPlanets, getPlanetById } from "../services/service-planets.js";
@@ -7,6 +8,7 @@ import { useEffect, useState } from "react";
 
 export const Home = () => {
   const { store, dispatch } = useGlobalReducer();
+
   const [people, setPeople] = useState([]);
   const [planets, setPlanets] = useState([]);
   const [vehicles, setVehicles] = useState([]);
@@ -19,6 +21,7 @@ export const Home = () => {
       );
       console.log(dataPeople);
       setPeople(dataPeople);
+      // Usamos dispatch() directamente
       dispatch({ type: "update_people", payload: dataPeople });
     };
     fetchPeople();
@@ -32,6 +35,7 @@ export const Home = () => {
       );
       console.log(dataPlanets);
       setPlanets(dataPlanets);
+      // También aquí
       dispatch({ type: "update_planets", payload: dataPlanets });
     };
     fetchPlanets();
@@ -45,6 +49,7 @@ export const Home = () => {
       );
       console.log(dataVehicles);
       setVehicles(dataVehicles);
+      // Y aquí
       dispatch({ type: "update_vehicles", payload: dataVehicles });
     };
     fetchVehicles();
@@ -52,7 +57,7 @@ export const Home = () => {
 
   return (
     <>
-      <div className=" mt-5">
+      <div className="mt-5">
         <h1>Personajes</h1>
         <Carrusel items={store.peopleList} category="people" />
         <h1>Planetas</h1>

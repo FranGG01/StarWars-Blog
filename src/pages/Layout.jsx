@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom/dist"
-import { FavoriteList } from "../components/FavoriteList"
+import FavoriteList from "../components/FavoriteList";
 import { Footer } from "../components/Footer"
 
 
