@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './VehicleDetails.css'
+import vehicles from "../../data/vehicles.json";
 
 const VehicleDetails = () => {
     const { id } = useParams();
@@ -12,14 +13,15 @@ const VehicleDetails = () => {
             .then(data => setVehicle(data.result))
             .catch(error => console.log("ERROR AL CARGAR STARSHIP"))
     }, [id])
+
     if (!vehicle) return <p className="text-center mt-5">Cargando Vehicle...</p>;
 
+    const imageInfo = vehicles.find(img => img.uid === id);
     return (<>
 
         <div className="container mt-5">
             <h1> {vehicle.properties.name} </h1>
-            <img src={"https://placehold.co/600x400?text=No+Image"} alt={vehicle.properties.name} />
-
+            <img src={imageInfo?.imgURL || "https://placehold.co/600x400?text=No+Image"} alt={vehicle.properties.name} />
             <ul className="vehicle-list mt-3">
                 <li className="vehicle-item">
                     <h4>Consumables:</h4>

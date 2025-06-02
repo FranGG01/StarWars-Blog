@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './PlanetDetails.css'
+import planets from "../../data/planets.json";
 
 const PlanetDetails = () => {
     const { id } = useParams();
@@ -12,16 +13,16 @@ const PlanetDetails = () => {
             .then(data => setPlanet(data.result))
             .catch(error => console.log("ERROR AL CARGAR EL PLANETA"))
     }, [id])
-    
+
     if (!planet) return <p className="text-center mt-5">Cargando planeta...</p>;
 
-
+    const imageInfo = planets.find(img => img.uid === id);
 
     return (<>
         <div className="container mt-5">
             <h1>{planet.properties.name} </h1>
-            <img src={"https://placehold.co/600x400?text=No+Image"} alt={planet.properties.name} />
-
+            <img src={imageInfo?.imgURL || "https://placehold.co/600x400?text=No+Image"} alt={planet.properties.name} />
+            
             <ul className="planet-list mt-3">
                 <li className="planet-item">
                     <h4>Climate:</h4>
