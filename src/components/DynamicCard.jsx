@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import "./Styles/Carrusel.css";
 
 function DynamicCard({ category, info }) {
   const { store, dispatch } = useGlobalReducer();
@@ -41,16 +42,16 @@ function DynamicCard({ category, info }) {
     dispatch({ type: "add_favorite", payload: info.name });
   };
   return (
-    <div className="card" style={{ width: "18rem" }}>
-      <img src="..." className="card-img-top" alt="..." />
-      <div className="card-body">
+    <div className="card-card">
+      <img src="https://placehold.co/400x300?text=No+Image" className="card-img-fluid" alt="..." />
+      <div className="card-body ">
         <h5 className="card-title">{info.name}</h5>
-        <span className="card-text">
-          <div className="flex-column">{renderProperties()}</div>
+        <span className="card-text d-flex">
+          <div className="">{renderProperties()}</div>
         </span>
       </div>
 
-      <div className="card-body d-flex justify-content-between">
+      <div className="card-body d-flex justify-content-between ">
         <button className="btn btn-primary">Leer mas</button>
         <button
           className="btn btn-warning"

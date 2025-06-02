@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './PlanetDetails.css'
+import planets from "../../data/planets.json";
 
 const PlanetDetails = () => {
     const { id } = useParams();
@@ -12,15 +13,34 @@ const PlanetDetails = () => {
             .then(data => setPlanet(data.result))
             .catch(error => console.log("ERROR AL CARGAR EL PLANETA"))
     }, [id])
-    
+
     if (!planet) return <p className="text-center mt-5">Cargando planeta...</p>;
+
+    const imageInfo = planets.find(img => img.uid === id);
+
+    const generatedDescription = `${planet.properties.name} es uno de los mundos fascinantes del universo de Star Wars. 
+    Con un clima predominantemente ${planet.properties.climate}, este planeta ofrece paisajes caracterizados por ${planet.properties.terrain}. 
+    Tiene una gravedad de ${planet.properties.gravity}, una característica que influye directamente en la vida que allí habita. 
+    Su diámetro es de ${planet.properties.diameter} km, y completa una rotación en ${planet.properties.rotation_period} horas, 
+    mientras que su órbita alrededor de su estrella tarda aproximadamente ${planet.properties.orbital_period} días. 
+    ${planet.properties.name} alberga una población de ${planet.properties.population !== "unknown" ? planet.properties.population : "origen incierto"}, 
+    lo que lo convierte en un lugar ${planet.properties.population !== "0" ? "habitado" : "inhóspito"} dentro de esta vasta galaxia.`;
 
 
 
     return (<>
         <div className="container mt-5">
-            <h1>{planet.properties.name} </h1>
-            <img src={"https://placehold.co/600x400?text=No+Image"} alt={planet.properties.name} />
+            <div className="character-card d-flex">
+                <img
+                    src={imageInfo?.imgURL || "https://placehold.co/600x400?text=No+Image"}
+                    alt={planet.properties.name}
+                    className="character-card-image"
+                />
+                <div className="character-card-info">
+                    <h2>{planet.properties.name.toUpperCase()}</h2>
+                    <p>{generatedDescription}</p>
+                </div>
+            </div>
 
             <ul className="planet-list mt-3">
                 <li className="planet-item">
