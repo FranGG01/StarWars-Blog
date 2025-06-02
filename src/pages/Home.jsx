@@ -1,22 +1,36 @@
-
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import {Carrusel} from "../components/Carrusel"
+import DynamicCard from "../components/DynamicCard.jsx";
+import { getPeople, getPeopleById } from "../services/service.js";
+import { useEffect, useState } from "react";
 
 export const Home = () => {
+  const { store, dispatch } = useGlobalReducer();
+  const [people, setPeople] = useState([]);
 
-  const {store, dispatch} =useGlobalReducer()
+  useEffect(() => {
+    const fetchPeople = async () => {
+      const data = await getPeople();
+      const dataPeople = await Promise.all(
+        data.map((people) => getPeopleById(people.uid))
+      );
+      console.log(dataPeople);
+      setPeople(dataPeople);
+      //   dispatch({ type: "SET_PEOPLE", payload: data });
+    };
+    fetchPeople();
+  }, []);
 
-	return (
-		<>
-		<div className=" mt-5">
-			 <h1>Personajes</h1>
-			 <Carrusel />
-			 <h1>Planetas</h1>
-			 <Carrusel />
-			 <h1>vehiculos</h1>
-			 <Carrusel />
-		</div>
-		</>
-		
-	);
-}; 
+  return (
+    <>
+      {people.map((person, index) => (
+        <DynamicCard
+          category="people"
+          key={index}
+          className="col-12 col-md-4 mb-3"
+          info={person.properties}
+          id={person.uid}
+        />
+      ))}
+    </>
+  );
+};
