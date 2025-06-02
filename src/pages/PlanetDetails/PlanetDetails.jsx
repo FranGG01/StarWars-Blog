@@ -1,0 +1,61 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import './PlanetDetails.css'
+
+const PlanetDetails = () => {
+    const { id } = useParams();
+    const [planet, setPlanet] = useState(null);
+
+    useEffect(() => {
+        fetch(`https://www.swapi.tech/api/planets/${id}`)
+            .then(res => res.json())
+            .then(data => setPlanet(data.result))
+            .catch(error => console.log("ERROR AL CARGAR EL PLANETA"))
+    }, [id])
+    if (!planet) return <p className="text-center mt-5">Cargando planeta...</p>;
+
+    return (<>
+        <div className="container mt-5">
+            <h1>{planet.properties.name} </h1>
+            <img src={"https://placehold.co/600x400?text=No+Image"} alt={planet.properties.name} />
+
+            <ul className="planet-list mt-3">
+                <li className="planet-item">
+                    <h4>Climate:</h4>
+                    <span>{planet.properties.climate}</span>
+                </li>
+                <li className="planet-item">
+                    <h4>Surface Water:</h4>
+                    <span>{planet.properties.surface_water}</span>
+                </li>
+                <li className="planet-item">
+                    <h4>Diameter:</h4>
+                    <span>{planet.properties.diameter}</span>
+                </li>
+                <li className="planet-item">
+                    <h4>Rotation Period:</h4>
+                    <span>{planet.properties.rotation_period}</span>
+                </li>
+                <li className="planet-item">
+                    <h4>Terrain:</h4>
+                    <span>{planet.properties.terrain}</span>
+                </li>
+                <li className="planet-item">
+                    <h4>Gravity:</h4>
+                    <span>{planet.properties.gravity}</span>
+                </li>
+                <li className="planet-item">
+                    <h4>Orbital Period:</h4>
+                    <span>{planet.properties.orbital_period}</span>
+                </li>
+                <li className="planet-item">
+                    <h4>Population:</h4>
+                    <span>{planet.properties.population}</span>
+                </li>
+            </ul>
+
+        </div>
+    </>)
+}
+
+export default PlanetDetails;
