@@ -27,7 +27,7 @@ const PeopleDetails = () => {
 
     
     return (
-        <div className="container mt-5">
+        <div className="container mt-5 ">
             <div className="character-card d-flex">
                 <img
                     src={person.image}
