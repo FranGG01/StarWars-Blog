@@ -1,10 +1,12 @@
-// src/pages/Home.jsx (o el path correcto donde tengas tu componente)
-import useGlobalReducer from "../hooks/useGlobalReducer"; // ajusta la ruta si es diferente
+import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Carrusel } from "../components/Carrusel.jsx";
 import { getPeople, getPeopleById } from "../services/service-people.js";
 import { getPlanets, getPlanetById } from "../services/service-planets.js";
 import { getVehicles, getVehicleById } from "../services/service-vehicles.js";
 import { useEffect, useState } from "react";
+import planetsData from "../data/planets.json";
+import vehiclesData from "../data/vehicles.json";
+import peopleData from "../data/people.json";
 
 export const Home = () => {
   const { store, dispatch } = useGlobalReducer();
@@ -14,46 +16,85 @@ export const Home = () => {
   const [vehicles, setVehicles] = useState([]);
 
   useEffect(() => {
-    const fetchPeople = async () => {
-      const data = await getPeople();
-      const dataPeople = await Promise.all(
-        data.map((people) => getPeopleById(people.uid))
-      );
-      console.log(dataPeople);
-      setPeople(dataPeople);
-      // Usamos dispatch() directamente
-      dispatch({ type: "update_people", payload: dataPeople });
-    };
-    fetchPeople();
-  }, []);
+    const fetchAll = async () => {
+      try {
+        // 1. Llamadas principales en paralelo
+        const [peopleList, planetList, vehicleList] = await Promise.all([
+          getPeople(),
+          getPlanets(),
+          getVehicles(),
+        ]);
 
-  useEffect(() => {
-    const fetchPlanets = async () => {
-      const data = await getPlanets();
-      const dataPlanets = await Promise.all(
-        data.map((planet) => getPlanetById(planet.uid))
-      );
-      console.log(dataPlanets);
-      setPlanets(dataPlanets);
-      // También aquí
-      dispatch({ type: "update_planets", payload: dataPlanets });
-    };
-    fetchPlanets();
-  }, []);
+        // 2. Llamadas por ID también en paralelo para obtener detalles completos
+        const [dataPeople, dataPlanets, dataVehicles] = await Promise.all([
+          Promise.all(peopleList.map((p) => getPeopleById(p.uid))),
+          Promise.all(planetList.map((p) => getPlanetById(p.uid))),
+          Promise.all(vehicleList.map((v) => getVehicleById(v.uid))),
+        ]);
 
-  useEffect(() => {
-    const fetchVehicles = async () => {
-      const data = await getVehicles();
-      const dataVehicles = await Promise.all(
-        data.map((vehicle) => getVehicleById(vehicle.uid))
-      );
-      console.log(dataVehicles);
-      setVehicles(dataVehicles);
-      // Y aquí
-      dispatch({ type: "update_vehicles", payload: dataVehicles });
+        // 3. Agregar imágenes a people desde peopleData
+        const peopleWithImg = dataPeople.map((person) => {
+          const swapiName = person.properties.name.toLowerCase().trim();
+
+          const matching = peopleData.find((p) => {
+            const nameNormalized = p.name.toLowerCase().trim();
+            return nameNormalized === swapiName;
+          });
+
+          return {
+            ...person,
+            properties: {
+              ...person.properties,
+              img:
+                matching?.img || "https://placehold.co/400x200?text=No+Image",
+            },
+          };
+        });
+
+        // 4. Agregar imágenes a planetas
+        const planetsWithImg = dataPlanets.map((planet) => {
+          const matching = planetsData.find((p) => p.uid === planet.uid);
+          return {
+            ...planet,
+            properties: {
+              ...planet.properties,
+              img:
+                matching?.imgURL ||
+                "https://placehold.co/400x200?text=No+Image",
+            },
+          };
+        });
+
+        // 5. Agregar imágenes a vehículos
+        const vehiclesWithImg = dataVehicles.map((vehicle) => {
+          const matching = vehiclesData.find((v) => v.uid === vehicle.uid);
+          return {
+            ...vehicle,
+            properties: {
+              ...vehicle.properties,
+              img:
+                matching?.imgURL ||
+                "https://placehold.co/400x200?text=No+Image",
+            },
+          };
+        });
+
+        // 6. Setear estados con los datos *con imágenes*
+        setPeople(peopleWithImg);
+        setPlanets(planetsWithImg);
+        setVehicles(vehiclesWithImg);
+
+        // 7. Actualizar el store con los datos con imágenes
+        dispatch({ type: "update_people", payload: peopleWithImg });
+        dispatch({ type: "update_planets", payload: planetsWithImg });
+        dispatch({ type: "update_vehicles", payload: vehiclesWithImg });
+      } catch (error) {
+        console.error("Error al cargar los datos:", error);
+      }
     };
-    fetchVehicles();
-  }, []);
+
+    fetchAll();
+  }, [dispatch]);
 
   return (
     <>
@@ -61,9 +102,9 @@ export const Home = () => {
         <h1>Personajes</h1>
         <Carrusel items={store.peopleList} category="people" />
         <h1>Planetas</h1>
-        <Carrusel items={store.planetsList} category="planets" />
-        <h1>vehiculos</h1>
-        <Carrusel items={store.vehiclesList} category="vehicles" />
+        <Carrusel items={store.planetsList} category="planet" />
+        <h1>Vehículos</h1>
+        <Carrusel items={store.vehiclesList} category="vehicle" />
       </div>
     </>
   );
