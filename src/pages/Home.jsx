@@ -7,8 +7,10 @@ import { useEffect, useState } from "react";
 import planetsData from "../data/planets.json";
 import vehiclesData from "../data/vehicles.json";
 import peopleData from "../data/people.json";
+
 export const Home = () => {
   const { store, dispatch } = useGlobalReducer();
+
   const [people, setPeople] = useState([]);
   const [planets, setPlanets] = useState([]);
   const [vehicles, setVehicles] = useState([]);
@@ -34,15 +36,10 @@ export const Home = () => {
         const peopleWithImg = dataPeople.map((person) => {
           const swapiName = person.properties.name.toLowerCase().trim();
 
-          console.log("SWAPI Name:", swapiName);
-
           const matching = peopleData.find((p) => {
             const nameNormalized = p.name.toLowerCase().trim();
-            console.log("  Comparing with:", nameNormalized);
             return nameNormalized === swapiName;
           });
-
-          console.log("  Found match:", matching);
 
           return {
             ...person,
@@ -97,7 +94,7 @@ export const Home = () => {
     };
 
     fetchAll();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -106,7 +103,7 @@ export const Home = () => {
         <Carrusel items={store.peopleList} category="people" />
         <h1>Planetas</h1>
         <Carrusel items={store.planetsList} category="planet" />
-        <h1>vehiculos</h1>
+        <h1>Vehículos</h1>
         <Carrusel items={store.vehiclesList} category="vehicle" />
       </div>
     </>
