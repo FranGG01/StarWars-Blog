@@ -9,7 +9,7 @@ export const Footer = () => (
 		
 		</div>
 		<p>
-			DESEAN QUE LA FUERZA OS ACOMPAÑE
+			A long time ago, in a code far, far away…
 			
 		</p>
 		

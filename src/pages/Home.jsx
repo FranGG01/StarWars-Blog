@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import planetsData from "../data/planets.json";
 import vehiclesData from "../data/vehicles.json";
 import peopleData from "../data/people.json";
+import TextPressure from '../components/TextPressure .jsx';
 
 export const Home = () => {
   const { store, dispatch } = useGlobalReducer();
@@ -14,6 +15,7 @@ export const Home = () => {
   const [people, setPeople] = useState([]);
   const [planets, setPlanets] = useState([]);
   const [vehicles, setVehicles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -88,6 +90,8 @@ export const Home = () => {
         dispatch({ type: "update_people", payload: peopleWithImg });
         dispatch({ type: "update_planets", payload: planetsWithImg });
         dispatch({ type: "update_vehicles", payload: vehiclesWithImg });
+        setIsLoading(false);
+
       } catch (error) {
         console.error("Error al cargar los datos:", error);
       }
@@ -95,6 +99,33 @@ export const Home = () => {
 
     fetchAll();
   }, [dispatch]);
+
+if (isLoading) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <TextPressure
+        text="May the Force be with you…"
+        flex={true}
+        alpha={false}
+        stroke={false}
+        width={true}
+        weight={true}
+        italic={true}
+        textColor="#ffffff"
+        strokeColor="#ff0000"
+        minFontSize={36}
+      />
+    </div>
+  );
+}
+
+
 
   return (
     <>
