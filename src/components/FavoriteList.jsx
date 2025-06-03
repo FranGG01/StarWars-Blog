@@ -8,12 +8,12 @@ const FavoriteList = () => {
   return (
     <nav className="navbar">
       <div className="container d-flex align-items-center">
-        <Link to="/" className="navbar-brand me-3">
+        <Link to="/" className="navbar-brand ps-3 pt-4">
           <img
             src="https://static-mh.content.disney.io/starwars/assets/navigation/sw_logo_stacked-336c62367939.png"
             alt="Star Wars Logo"
             className="img-fluid"
-            style={{ width: "50px", height: "auto" }}
+            style={{ width: "90px", height: "auto" }}
           />
         </Link>
 

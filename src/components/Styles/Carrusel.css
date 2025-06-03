@@ -1,20 +1,22 @@
 
 .carrusel-scroll-container::-webkit-scrollbar {
   height: 8px; 
+  
 }
 
 .carrusel-scroll-container::-webkit-scrollbar-track {
-  background: #888; 
+  background: #88888827; 
   border-radius: 10px;
+  
 }
 
 .carrusel-scroll-container::-webkit-scrollbar-thumb {
-  background-color: #888; 
+  background-color: #8888882f; 
   border-radius: 10px;
 }
 
 .carrusel-scroll-container::-webkit-scrollbar-thumb:hover {
-  background-color: #555; 
+  background-color: hwb(197 7% 40% / 0.514); 
 }
 .carrusel-cards {
   display: flex;
@@ -27,13 +29,15 @@ width: 350px;
     align-items: stretch;
     flex-wrap: nowrap;
     align-content: space-between;
-    color: aliceblue;
-    background-color: black;
+    color: white;
+    background-image: url(https://is.zobj.net/image-server/v1/images?r=-qxY07ETmSgsymh1jYg08Qv8QgnWhkHG9y8ao0R-OajC3tpe2A9wvSIMIedNrrjeyQhgUM_T6kw6DHDpZTEbXFl5bmmQOseaK1Ip1fR4gwxPNP-8lQ9vGbXSGgyVE6TDReFNRVacEQJlwzIfP5xQuF2diZ9dVXRxBWYXdeQ67QriHoJYrT6T87dCL661AAoSOA5mN1HMlgPsOFQCdd-IDF5Zt3vfo_4jZf7zf2wD-_ZErvd9xwgwrFJ5L9I);
     padding: 15px;
     border-radius: 5%;
     justify-content: flex-end;
     flex-direction: column;
     margin: 5px;
- 
- 
+    box-shadow: 0 0 15px hwb(204 4% 10% / 0.705);
+ }
+.navbar-principal{
+  background-color: gray;
 }

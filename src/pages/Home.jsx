@@ -99,11 +99,11 @@ export const Home = () => {
   return (
     <>
       <div className="mt-5">
-        <h1>Personajes</h1>
+        <h1 className="h1-home">Personajes</h1>
         <Carrusel items={store.peopleList} category="people" />
-        <h1>Planetas</h1>
+        <h1 className="h1-home">Planetas</h1>
         <Carrusel items={store.planetsList} category="planet" />
-        <h1>Vehículos</h1>
+        <h1 className="h1-home">Vehículos</h1>
         <Carrusel items={store.vehiclesList} category="vehicle" />
       </div>
     </>
