@@ -1,11 +1,17 @@
+import { width } from "@fortawesome/free-solid-svg-icons/fa0";
+
 export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
+		<footer className="footer mt-auto py-3 text-center">
+		<img className="img-gift" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExazd3NGRpZGc0bDBoYzF4ZG1pN3ZnejIxbnhoOG5kd3o2NzY1eXphZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/a5tHnpiMx4uiY/giphy.gif" alt="" srcset="" />
+		<div className="parrafo-footer">
+		
+			<a href="https://github.com/FranGG01">FRAN</a> <a href="https://github.com/Sofiaivars">SOFI</a> <a href="https://github.com/00hank00">JUANCA</a> <a href="https://github.com/Nino1508">TONINO</a> 
+		
+		</div>
 		<p>
-			Check the <a target="_blank" href="https://4geeks.com/docs/start/start-react-advanced-project">template documentation</a> <i className="fa-solid fa-file"></i> for help.
+			DESEAN QUE LA FUERZA OS ACOMPAÑE
+			
 		</p>
-		<p>
-			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			<a href="http://www.4geeksacademy.com">4Geeks Academy</a>
-		</p>
+		
 	</footer>
 );
