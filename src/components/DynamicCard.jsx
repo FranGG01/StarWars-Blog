@@ -43,12 +43,14 @@ function DynamicCard({ category, info, id }) {
   };
   return (
     <div className="card-card">
+      <div>
       <img
         src={info.img}
         className="img-fluid"
         alt="..."
-        style={{ width: "400px", height: "200px", objectFit: "cover" }}
+        style={{ width: "auto", height: "200px", objectFit: "cover" }}
       />
+      </div>
       <div className="card-body ">
         <h5 className="card-title">{info.name}</h5>
         <span className="card-text d-flex">
@@ -56,7 +58,7 @@ function DynamicCard({ category, info, id }) {
         </span>
       </div>
 
-      <div className="card-body d-flex justify-content-between ">
+      <div className="card-body d-flex justify-content-between align-items-end ">
         <button
           className="btn btn-primary"
           onClick={() => (window.location.href = `/${category}/${id}`)}
