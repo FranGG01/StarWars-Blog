@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { StoreContext } from "../hooks/useGlobalReducer"; // ajusta la ruta
+import { StoreContext } from "../hooks/useGlobalReducer";
 
 const FavoriteList = () => {
   const { store, actions } = useContext(StoreContext);
@@ -8,7 +8,6 @@ const FavoriteList = () => {
   return (
     <nav className="navbar">
       <div className="container d-flex align-items-center">
-        {/* Logo similar al ejemplo */}
         <Link to="/" className="navbar-brand me-3">
           <img
             src="https://static-mh.content.disney.io/starwars/assets/navigation/sw_logo_stacked-336c62367939.png"
