@@ -18,13 +18,13 @@ const PlanetDetails = () => {
 
     const imageInfo = planets.find(img => img.uid === id);
 
-    const generatedDescription = `${planet.properties.name} es uno de los mundos fascinantes del universo de Star Wars. 
-    Con un clima predominantemente ${planet.properties.climate}, este planeta ofrece paisajes caracterizados por ${planet.properties.terrain}. 
-    Tiene una gravedad de ${planet.properties.gravity}, una característica que influye directamente en la vida que allí habita. 
-    Su diámetro es de ${planet.properties.diameter} km, y completa una rotación en ${planet.properties.rotation_period} horas, 
-    mientras que su órbita alrededor de su estrella tarda aproximadamente ${planet.properties.orbital_period} días. 
-    ${planet.properties.name} alberga una población de ${planet.properties.population !== "unknown" ? planet.properties.population : "origen incierto"}, 
-    lo que lo convierte en un lugar ${planet.properties.population !== "0" ? "habitado" : "inhóspito"} dentro de esta vasta galaxia.`;
+   const generatedDescription = `${planet.properties.name} is one of the fascinating worlds in the Star Wars universe. 
+  With a predominantly ${planet.properties.climate} climate, this planet features landscapes characterized by ${planet.properties.terrain}. 
+  It has a gravity of ${planet.properties.gravity}, a factor that directly influences the lifeforms that inhabit it. 
+  Its diameter is ${planet.properties.diameter} km, and it completes a rotation in ${planet.properties.rotation_period} hours, 
+  while its orbit around its star takes approximately ${planet.properties.orbital_period} days. 
+  ${planet.properties.name} is home to a population of ${planet.properties.population !== "unknown" ? planet.properties.population : "uncertain origin"}, 
+  making it a ${planet.properties.population !== "0" ? "populated" : "inhospitable"} place within this vast galaxy.`;
 
 
 

@@ -17,15 +17,16 @@ const VehicleDetails = () => {
     if (!vehicle) return <p className="text-center mt-5">Cargando vehículo...</p>;
 
     const imageInfo = vehicles.find(img => img.uid === id);
+    
+const generatedDescription = `${vehicle.properties.name} is a representative vehicle in the Star Wars universe, 
+  classified as a ${vehicle.properties.vehicle_class}. It was manufactured by ${vehicle.properties.manufacturer}, 
+  one of the most important companies in galactic technology production.
+  This vehicle has a length of ${vehicle.properties.length} meters and can transport up to ${vehicle.properties.passengers} passengers, 
+  in addition to a crew of ${vehicle.properties.crew} members. 
+  It has a cargo capacity of ${vehicle.properties.cargo_capacity} units, 
+  making it a ${parseInt(vehicle.properties.cargo_capacity) > 500 ? "robust and versatile" : "light and maneuverable"} option.`;
 
-    const generatedDescription = `${vehicle.properties.name} es un vehículo representativo del universo de Star Wars, 
-    clasificado como ${vehicle.properties.vehicle_class}. Fue fabricado por ${vehicle.properties.manufacturer}, 
-    una de las compañías más relevantes en la producción de tecnología galáctica.
-    Este vehículo tiene una longitud de ${vehicle.properties.length} metros y puede transportar hasta ${vehicle.properties.passengers} pasajeros, 
-    además de una tripulación compuesta por ${vehicle.properties.crew} miembros. 
-    Cuenta con una capacidad de carga de ${vehicle.properties.cargo_capacity} unidades, 
-    lo que lo convierte en una opción ${parseInt(vehicle.properties.cargo_capacity) > 500 ? "robusta y versátil" : "ligera y maniobrable"}.
-  `;
+  
 
     return (
         <div className="container mt-5">

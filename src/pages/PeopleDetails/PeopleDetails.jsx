@@ -17,13 +17,13 @@ const PeopleDetails = () => {
 
     if (!person) return <p className="text-center mt-5">Cargando personaje...</p>;
 
-  const generatedDescription = `${person.name} es un personaje destacado del vasto universo de Star Wars. 
-    Cuenta con una altura de aproximadamente ${person.height} cm y un peso de ${person.mass} kg, 
-    características que pueden influir en su desempeño físico dentro de la historia galáctica. 
-    Su género es ${person.gender}, y posee una tonalidad de piel ${person.skinColor || "desconocida"}, 
-    lo que aporta aún más diversidad a las especies y culturas que habitan esta saga. 
-    ${person.name.split(" ")[0]} proviene de ${person.homeworld || "un planeta cuyo origen se mantiene en el misterio"}, 
-    lo que añade un toque de intriga a su historia personal y a su trasfondo dentro de la galaxia.`;
+const generatedDescription = `${person.name} is a prominent character in the vast Star Wars universe. 
+  They have a height of approximately ${person.height} cm and a weight of ${person.mass} kg, 
+  characteristics that may influence their physical performance within the galactic storyline. 
+  Their gender is ${person.gender}, and they have a ${person.skinColor || "unknown"} skin tone, 
+  which adds even more diversity to the species and cultures that inhabit this saga. 
+  ${person.name.split(" ")[0]} comes from ${person.homeworld || "a planet whose origin remains a mystery"}, 
+  adding a touch of intrigue to their personal story and background within the galaxy.`;
 
     
     return (
