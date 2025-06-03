@@ -1,22 +1,15 @@
+// src/store.js
 export const initialStore = () => {
   return {
     message: null,
     todos: [
-      {
-        id: 1,
-        title: "Make the bed",
-        background: null,
-      },
-      {
-        id: 2,
-        title: "Do my homework",
-        background: null,
-      },
+      { id: 1, title: "Make the bed", background: null },
+      { id: 2, title: "Do my homework", background: null },
     ],
     peopleList: [],
     planetsList: [],
     vehiclesList: [],
-    favoriteList: [],
+    favoriteList: [], // lista de favoritos
   };
 };
 
@@ -24,46 +17,21 @@ export default function storeReducer(store, action = {}) {
   switch (action.type) {
     case "add_task":
       const { id, color } = action.payload;
-
       return {
         ...store,
         todos: store.todos.map((todo) =>
           todo.id === id ? { ...todo, background: color } : todo
         ),
       };
-
     case "update_people":
-      const peopleList = action.payload;
-      console.log("[STORE]", peopleList);
-      return {
-        ...store,
-        peopleList,
-      };
-
+      return { ...store, ppeopleList: action.payload };
     case "update_planets":
-      const planetsList = action.payload;
-      console.log("[STORE]", planetsList);
-      return {
-        ...store,
-        planetsList,
-      };
+      return { ...store, planetsList: action.payload };
     case "update_vehicles":
-      const vehiclesList = action.payload;
-      console.log("[STORE]", vehiclesList);
-      return {
-        ...store,
-        vehiclesList,
-      };
-
+      return { ...store, vehiclesList: action.payload };
     case "add_favorite":
-      const favoriteList = action.payload;
-      console.log("[STORE] Favorite List Updated", favoriteList);
-      return {
-        ...store,
-        favoriteList,
-      };
-
+      return { ...store, favoriteList: action.payload };
     default:
-      throw Error("Unknown action.");
+      throw Error("Unknown action");
   }
 }

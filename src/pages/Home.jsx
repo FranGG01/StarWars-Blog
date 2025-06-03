@@ -1,96 +1,3 @@
-// import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-// import { Carrusel } from "../components/Carrusel.jsx";
-// import { getPeople, getPeopleById } from "../services/service-people.js";
-// import { getPlanets, getPlanetById } from "../services/service-planets.js";
-// import { getVehicles, getVehicleById } from "../services/service-vehicles.js";
-// import { useEffect, useState } from "react";
-// import planetsData from "../data/planets.json";
-// import vehiclesData from "../data/vehicles.json";
-
-// export const Home = () => {
-//   const { store, dispatch } = useGlobalReducer();
-//   const [people, setPeople] = useState([]);
-//   const [planets, setPlanets] = useState([]);
-//   const [vehicles, setVehicles] = useState([]);
-
-//   useEffect(() => {
-//     const fetchPeople = async () => {
-//       const data = await getPeople();
-//       const dataPeople = await Promise.all(
-//         data.map((people) => getPeopleById(people.uid))
-//       );
-//       console.log(dataPeople);
-//       setPeople(dataPeople);
-//       dispatch({ type: "update_people", payload: dataPeople });
-//     };
-//     fetchPeople();
-//   }, []);
-
-//   useEffect(() => {
-//     const fetchPlanets = async () => {
-//       const data = await getPlanets();
-//       const dataPlanets = await Promise.all(
-//         data.map((planet) => getPlanetById(planet.uid))
-//       );
-//       const planetsWithImg = dataPlanets.map((planet) => {
-//         const matchingData = planetsData.find((p) => p.uid === planet.uid);
-//         return {
-//           ...planet,
-//           properties: {
-//             ...planet.properties,
-//             img:
-//               matchingData?.imgURL ||
-//               "https://placehold.co/400x200?text=No+Image",
-//           },
-//         };
-//       });
-
-//       console.log(planetsWithImg);
-//       setPlanets(planetsWithImg);
-//       dispatch({ type: "update_planets", payload: planetsWithImg });
-//     };
-
-//     fetchPlanets();
-//   }, []);
-
-//   useEffect(() => {
-//     const fetchVehicles = async () => {
-//       const data = await getVehicles();
-//       const dataVehicles = await Promise.all(
-//         data.map((vehicle) => getVehicleById(vehicle.uid))
-//       );
-//       const vehiclesWithImg = dataVehicles.map((vehicle) => {
-//         const matchingData = vehiclesData.find((v) => v.uid === vehicle.uid);
-//         return {
-//           ...vehicle,
-//           properties: {
-//             ...vehicle.properties,
-//             img:
-//               matchingData?.imgURL ||
-//               "https://placehold.co/400x200?text=No+Image",
-//           },
-//         };
-//       });
-//       console.log(vehiclesWithImg);
-//       setVehicles(vehiclesWithImg);
-//       dispatch({ type: "update_vehicles", payload: vehiclesWithImg });
-//     };
-//     fetchVehicles();
-//   }, []);
-
-//   return (
-//     <>
-//       <div className=" mt-5">
-//         <h1>Personajes</h1>
-//         <Carrusel items={store.peopleList} category="people" />
-//         <h1>Planetas</h1>
-//         <Carrusel items={store.planetsList} category="planet" />
-//         <h1>vehiculos</h1>
-//         <Carrusel items={store.vehiclesList} category="vehicle" />
-//       </div>
-//     </>
-//   );
-// };
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Carrusel } from "../components/Carrusel.jsx";
 import { getPeople, getPeopleById } from "../services/service-people.js";
@@ -100,8 +7,10 @@ import { useEffect, useState } from "react";
 import planetsData from "../data/planets.json";
 import vehiclesData from "../data/vehicles.json";
 import peopleData from "../data/people.json";
+
 export const Home = () => {
   const { store, dispatch } = useGlobalReducer();
+
   const [people, setPeople] = useState([]);
   const [planets, setPlanets] = useState([]);
   const [vehicles, setVehicles] = useState([]);
@@ -127,15 +36,10 @@ export const Home = () => {
         const peopleWithImg = dataPeople.map((person) => {
           const swapiName = person.properties.name.toLowerCase().trim();
 
-          console.log("SWAPI Name:", swapiName);
-
           const matching = peopleData.find((p) => {
             const nameNormalized = p.name.toLowerCase().trim();
-            console.log("  Comparing with:", nameNormalized);
             return nameNormalized === swapiName;
           });
-
-          console.log("  Found match:", matching);
 
           return {
             ...person,
@@ -190,7 +94,7 @@ export const Home = () => {
     };
 
     fetchAll();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -199,7 +103,7 @@ export const Home = () => {
         <Carrusel items={store.peopleList} category="people" />
         <h1>Planetas</h1>
         <Carrusel items={store.planetsList} category="planet" />
-        <h1>vehiculos</h1>
+        <h1>Vehículos</h1>
         <Carrusel items={store.vehiclesList} category="vehicle" />
       </div>
     </>
