@@ -4,7 +4,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import "./Styles/Carrusel.css";
 
-function DynamicCard({ category, info }) {
+function DynamicCard({ category, info, id }) {
   const { store, dispatch } = useGlobalReducer();
 
   const renderProperties = () => {
@@ -18,7 +18,7 @@ function DynamicCard({ category, info }) {
             <p>Pelo: {info.hair_color}</p>
           </>
         );
-      case "planets":
+      case "planet":
         return (
           <>
             <p>Población: {info.population}</p>
@@ -26,7 +26,7 @@ function DynamicCard({ category, info }) {
             <p>Terreno: {info.terrain}</p>
           </>
         );
-      case "vehicles":
+      case "vehicle":
         return (
           <>
             <p>Modelo: {info.model}</p>
@@ -43,7 +43,12 @@ function DynamicCard({ category, info }) {
   };
   return (
     <div className="card-card">
-      <img src="https://placehold.co/400x300?text=No+Image" className="card-img-fluid" alt="..." />
+      <img
+        src={info.img}
+        className="img-fluid"
+        alt="..."
+        style={{ width: "400px", height: "200px", objectFit: "cover" }}
+      />
       <div className="card-body ">
         <h5 className="card-title">{info.name}</h5>
         <span className="card-text d-flex">
@@ -52,7 +57,12 @@ function DynamicCard({ category, info }) {
       </div>
 
       <div className="card-body d-flex justify-content-between ">
-        <button className="btn btn-primary">Leer mas</button>
+        <button
+          className="btn btn-secondary"
+          onClick={() => (window.location.href = `/${category}/${id}`)}
+        >
+          Leer Mas
+        </button>
         <button
           className="btn btn-warning"
           onClick={() => addFavorite(info.name)}
