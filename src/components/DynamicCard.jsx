@@ -58,7 +58,7 @@ function DynamicCard({ category, info, id }) {
 
       <div className="card-body d-flex justify-content-between ">
         <button
-          className="btn btn-secondary"
+          className="btn btn-primary"
           onClick={() => (window.location.href = `/${category}/${id}`)}
         >
           Leer Mas
