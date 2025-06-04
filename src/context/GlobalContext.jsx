@@ -15,15 +15,7 @@ function reducer(state, action) {
       return { ...state, planets: action.payload };
     case "SET_VEHICLES":
       return { ...state, vehicles: action.payload };
-    case "ADD_FAVORITE":
-      return { ...state, favorites: [...state.favorites, action.payload] };
-    case "REMOVE_FAVORITE":
-      return {
-        ...state,
-        favorites: state.favorites.filter(
-          (fav) => fav.id !== action.payload.id
-        ),
-      };
+
     default:
       return state;
   }

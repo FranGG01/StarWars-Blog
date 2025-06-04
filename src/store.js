@@ -55,12 +55,17 @@ export default function storeReducer(store, action = {}) {
         vehiclesList,
       };
 
-    case "add_favorite":
-      const favoriteList = action.payload;
-      console.log("[STORE] Favorite List Updated", favoriteList);
+    case "ADD_FAVORITE":
       return {
         ...store,
-        favoriteList,
+        favoriteList: [...store.favoriteList, action.payload],
+      };
+    case "REMOVE_FAVORITE":
+      return {
+        ...store,
+        favoriteList: store.favoriteList.filter(
+          (item) => item.name !== action.payload.name
+        ),
       };
 
     default:
