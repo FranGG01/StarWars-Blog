@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import planetsData from "../data/planets.json";
 import vehiclesData from "../data/vehicles.json";
 import peopleData from "../data/people.json";
-import TextPressure from '../components/TextPressure .jsx';
+import TextPressure from "../components/TextPressure .jsx";
 
 export const Home = () => {
   const { store, dispatch } = useGlobalReducer();
@@ -20,21 +20,18 @@ export const Home = () => {
   useEffect(() => {
     const fetchAll = async () => {
       try {
-        // 1. Llamadas principales en paralelo
         const [peopleList, planetList, vehicleList] = await Promise.all([
           getPeople(),
           getPlanets(),
           getVehicles(),
         ]);
 
-        // 2. Llamadas por ID también en paralelo para obtener detalles completos
         const [dataPeople, dataPlanets, dataVehicles] = await Promise.all([
           Promise.all(peopleList.map((p) => getPeopleById(p.uid))),
           Promise.all(planetList.map((p) => getPlanetById(p.uid))),
           Promise.all(vehicleList.map((v) => getVehicleById(v.uid))),
         ]);
 
-        // 3. Agregar imágenes a people desde peopleData
         const peopleWithImg = dataPeople.map((person) => {
           const swapiName = person.properties.name.toLowerCase().trim();
 
@@ -53,7 +50,6 @@ export const Home = () => {
           };
         });
 
-        // 4. Agregar imágenes a planetas
         const planetsWithImg = dataPlanets.map((planet) => {
           const matching = planetsData.find((p) => p.uid === planet.uid);
           return {
@@ -67,7 +63,6 @@ export const Home = () => {
           };
         });
 
-        // 5. Agregar imágenes a vehículos
         const vehiclesWithImg = dataVehicles.map((vehicle) => {
           const matching = vehiclesData.find((v) => v.uid === vehicle.uid);
           return {
@@ -81,17 +76,14 @@ export const Home = () => {
           };
         });
 
-        // 6. Setear estados con los datos *con imágenes*
         setPeople(peopleWithImg);
         setPlanets(planetsWithImg);
         setVehicles(vehiclesWithImg);
 
-        // 7. Actualizar el store con los datos con imágenes
         dispatch({ type: "update_people", payload: peopleWithImg });
         dispatch({ type: "update_planets", payload: planetsWithImg });
         dispatch({ type: "update_vehicles", payload: vehiclesWithImg });
         setIsLoading(false);
-
       } catch (error) {
         console.error("Error al cargar los datos:", error);
       }
@@ -100,32 +92,30 @@ export const Home = () => {
     fetchAll();
   }, [dispatch]);
 
-if (isLoading) {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <TextPressure
-        text="May the Force be with you…"
-        flex={true}
-        alpha={false}
-        stroke={false}
-        width={true}
-        weight={true}
-        italic={true}
-        textColor="#ffffff"
-        strokeColor="#ff0000"
-        minFontSize={36}
-      />
-    </div>
-  );
-}
-
-
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <TextPressure
+          text="May the Force be with you…"
+          flex={true}
+          alpha={false}
+          stroke={false}
+          width={true}
+          weight={true}
+          italic={true}
+          textColor="#ffffff"
+          strokeColor="#ff0000"
+          minFontSize={36}
+        />
+      </div>
+    );
+  }
 
   return (
     <>
