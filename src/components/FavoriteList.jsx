@@ -1,9 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../hooks/useGlobalReducer";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
 const FavoriteList = () => {
   const { store, actions } = useContext(StoreContext);
 
