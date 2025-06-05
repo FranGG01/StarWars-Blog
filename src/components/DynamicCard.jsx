@@ -6,19 +6,20 @@ import "./Styles/Carrusel.css";
 
 function DynamicCard({ category, info, id }) {
   const { store, dispatch } = useGlobalReducer();
-  const addFavorite = () => {
-    const alreadyInFavorites = store.favoriteList.some(
-      (fav) => fav.name === info.name && fav.resource === category
-    );
 
-    if (!alreadyInFavorites) {
+
+  const isFavorite = store.favoriteList.some(
+    (fav) => fav.name === info.name && fav.resource === category
+  );
+
+  const addFavorite = () => {
+    if (!isFavorite) {
       const newFavorite = {
         name: info.name,
         resource: category,
         uid: id,
         properties: info,
       };
-
       dispatch({ type: "ADD_FAVORITE", payload: newFavorite });
     }
   };
@@ -68,7 +69,7 @@ function DynamicCard({ category, info, id }) {
       <div className="card-body ">
         <h5 className="card-title">{info.name}</h5>
         <span className="card-text d-flex">
-          <div className="">{renderProperties()}</div>
+          <div>{renderProperties()}</div>
         </span>
       </div>
 
@@ -79,8 +80,15 @@ function DynamicCard({ category, info, id }) {
         >
           Leer Mas
         </button>
-        <button className="btn btn-warning" onClick={addFavorite}>
-          <FontAwesomeIcon icon={faHeart} />
+
+        <button
+          className={`btn btn-warning ${isFavorite ? "favorite-active" : ""}`}
+          onClick={addFavorite}
+        >
+          <FontAwesomeIcon
+            icon={faHeart}
+            style={{ color: isFavorite ? "red" : "gray" }}
+          />
         </button>
       </div>
     </div>

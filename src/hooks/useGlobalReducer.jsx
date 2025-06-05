@@ -1,21 +1,19 @@
 // src/hooks/useGlobalReducer.jsx
 import { createContext, useReducer, useContext } from "react";
-import storeReducer, { initialStore } from "../store"; // ajusta el path si es necesario
+import storeReducer, { initialStore } from "../store"; 
 
 export const StoreContext = createContext();
 
 export const StoreProvider = ({ children }) => {
   const [store, dispatch] = useReducer(storeReducer, initialStore());
-
   const addFavorite = (favorite) => {
-    const newFavs = [...store.favoriteList, favorite];
-    dispatch({ type: "add_favorite", payload: newFavs });
+    dispatch({ type: "ADD_FAVORITE", payload: favorite });  
   };
 
-  const removeFavorite = (id) => {
-    const newFavs = store.favoriteList.filter((fav) => fav.id !== id);
-    dispatch({ type: "add_favorite", payload: newFavs });
+  const removeFavorite = (favorite) => {
+    dispatch({ type: "REMOVE_FAVORITE", payload: favorite });  
   };
+
 
   return (
     <StoreContext.Provider value={{ store, dispatch, actions: { addFavorite, removeFavorite } }}>

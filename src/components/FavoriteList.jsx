@@ -1,10 +1,9 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { StoreContext } from "../hooks/useGlobalReducer";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const FavoriteList = () => {
-  const { store, actions } = useContext(StoreContext);
+  const { store, actions } = useGlobalReducer();
 
   return (
     <nav className="navbar">
@@ -18,7 +17,6 @@ const FavoriteList = () => {
           />
         </Link>
 
-        {/* Menú desplegable favoritos */}
         <div className="dropdown me-3">
           <button
             className="btn btn-secondary dropdown-toggle"
@@ -33,27 +31,24 @@ const FavoriteList = () => {
             </span>
           </button>
           <ul className="dropdown-menu" aria-labelledby="favoritesDropdown">
-            {store.favoriteList && store.favoriteList.length > 0 ? (
+            {store.favoriteList.length > 0 ? (
               store.favoriteList.map((fav, index) => (
                 <li
-                  key={fav.uid}
+                  key={index}
                   className="dropdown-item d-flex justify-content-between align-items-center"
                 >
-                  <Link to={`${fav.resource}/${fav.uid}`}>
-                    {fav.properties ? fav.properties.name : fav.uid}
+                  <Link to={`${fav.resource}/${fav.uid || fav.id}`}>
+                    {fav.properties ? fav.properties.name : fav.name}
                   </Link>
-                  {/* Botón de eliminar */}
                   <button
                     className="btn btn-sm btn-outline-danger"
                     title="Remove"
-                    onClick={() => {
-                      const newFavs = store.favoriteList.filter(
-                        (_, i) => i !== index
-                      );
-                      actions.add_favorite(newFavs);
-                    }}
+                    onClick={(e) => {
+                      e.stopPropagation(); 
+                      actions.removeFavorite(fav)}
+                    }
                   >
-                    &times; {/* X para eliminar */}
+                    🗑️
                   </button>
                 </li>
               ))
